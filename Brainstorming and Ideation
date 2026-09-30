@@ -1,0 +1,57 @@
+Project Structure
+PocketSmart_AI/
+│
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── database.py
+│   ├── schemas.py
+│   │
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   ├── home.py
+│   │   ├── party.py
+│   │   ├── jewelry.py
+│   │   └── auth.py
+│   │
+│   └── services/
+│       ├── __init__.py
+│       └── gemini_utils.py
+│
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── dashboard.html
+│   │
+│   ├── home_planner.html
+│   ├── home_recommendations.html
+│   │
+│   ├── party_planner.html
+│   ├── party_recommendations.html
+│   │
+│   ├── jewelry_planner.html
+│   ├── jewelry_recommendations.html
+│   │
+│   ├── history.html
+│   └── testimonials.html
+│
+├── static/
+│   ├── style.css
+│   └── images/
+│
+├── .env
+├── requirements.txt
+└── README.mdy
+.env
+Create .env in the main project folder:
+GOOGLE_API_KEY=YOUR_GEMINI_API_KEY
+Example:
+PocketSmart_AI/
+│
+├── app/
+├── templates/
+├── static/
+├── .env
+└── requirements.txt
+Don't put .env inside app/.
