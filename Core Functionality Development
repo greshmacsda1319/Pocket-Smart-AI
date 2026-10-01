@@ -1,0 +1,127 @@
+Core Functionality Development
+Purpose
+Create the main AI logic for:
+Home Interior Planning
+Party Planning
+Jewelry Recommendation
+The document identifies gemini_utils.py as the main utility for prompt orchestration, budget formatting, domain segmentation, and AI-related processing. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+app/services/gemini_utils.py
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+genai.configure(
+    api_key=os.getenv("GOOGLE_API_KEY")
+)
+
+
+def get_gemini_response(prompt):
+
+    model = genai.GenerativeModel(
+        "gemini-1.5-flash"
+    )
+
+    response = model.generate_content(prompt)
+
+    return response.text
+
+
+def get_home_recommendations(
+    budget,
+    room,
+    requirements
+):
+
+    prompt = f"""
+You are PocketSmart AI.
+
+Create a budget-friendly home interior plan.
+
+Budget: ₹{budget}
+Room: {room}
+Requirements: {requirements}
+
+Provide recommendations for:
+
+1. Furniture
+2. Lighting
+3. Decoration
+4. Other useful products
+
+For each recommendation provide:
+
+- Product name
+- Category
+- Estimated price
+- Suggested platform
+- Reason
+
+Keep the estimated total within the given budget.
+"""
+
+    return get_gemini_response(prompt)
+
+
+def get_party_recommendations(
+    budget,
+    guests,
+    event_type,
+    venue
+):
+
+    prompt = f"""
+You are PocketSmart AI.
+
+Create a budget-friendly party plan.
+
+Budget: ₹{budget}
+Number of Guests: {guests}
+Event Type: {event_type}
+Venue: {venue}
+
+Divide the budget into:
+
+1. Food
+2. Decoration
+3. Entertainment
+4. Venue
+5. Other expenses
+
+Provide estimated costs and suitable recommendations.
+
+Keep the total estimated cost within the given budget.
+"""
+
+    return get_gemini_response(prompt)
+
+
+def get_jewelry_recommendations(
+    budget,
+    occasion,
+    style
+):
+
+    prompt = f"""
+You are PocketSmart AI.
+
+Recommend jewelry based on:
+
+Budget: ₹{budget}
+Occasion: {occasion}
+Style: {style}
+
+Provide:
+
+- Jewelry type
+- Suggested design
+- Estimated price
+- Suggested platform
+- Reason for recommendation
+
+Keep the recommendations within the budget.
+"""
+
+    return get_gemini_response(prompt)
