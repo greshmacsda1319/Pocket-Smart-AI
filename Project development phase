@@ -1,0 +1,229 @@
+app/routes/party.py
+The document defines /generate-party for venue, food and decoration recommendations based on event details and guest count. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+from app.services.gemini_utils import get_party_recommendations
+
+
+router = APIRouter()
+
+templates = Jinja2Templates(directory="templates")
+
+
+@router.get("/party-planner", response_class=HTMLResponse)
+async def party_planner(request: Request):
+
+    return templates.TemplateResponse(
+        "party_planner.html",
+        {
+            "request": request
+        }
+    )
+
+
+@router.post("/generate-party", response_class=HTMLResponse)
+async def generate_party(
+    request: Request,
+    budget: float = Form(...),
+    guests: int = Form(...),
+    event_type: str = Form(...),
+    venue: str = Form(...)
+):
+
+    recommendation = get_party_recommendations(
+        budget,
+        guests,
+        event_type,
+        venue
+    )
+
+    return templates.TemplateResponse(
+        "party_recommendations.html",
+        {
+            "request": request,
+            "recommendation": recommendation,
+            "budget": budget,
+            "guests": guests,
+            "event_type": event_type
+        }
+    )
+12. app/routes/jewelry.py
+The document specifies that the Jewelry Planner accepts text and an optional image input. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+For the first working version:
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+from app.services.gemini_utils import get_jewelry_recommendations
+
+
+router = APIRouter()
+
+templates = Jinja2Templates(directory="templates")
+
+
+@router.get("/jewelry-planner", response_class=HTMLResponse)
+async def jewelry_planner(request: Request):
+
+    return templates.TemplateResponse(
+        "jewelry_planner.html",
+        {
+            "request": request
+        }
+    )
+
+
+@router.post(
+    "/generate-jewelry",
+    response_class=HTMLResponse
+)
+async def generate_jewelry(
+    request: Request,
+    budget: float = Form(...),
+    occasion: str = Form(...),
+    style: str = Form(...)
+):
+
+    recommendation = get_jewelry_recommendations(
+        budget,
+        occasion,
+        style
+    )
+
+    return templates.TemplateResponse(
+        "jewelry_recommendations.html",
+        {
+            "request": request,
+            "recommendation": recommendation,
+            "budget": budget,
+            "occasion": occasion,
+            "style": style
+        }
+    )
+13. app/routes/auth.py
+The document includes /login, /register, /logout, /token, /session-info, and /session-data. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+For the basic project:
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+
+from app.database import get_connection
+
+
+router = APIRouter()
+
+templates = Jinja2Templates(directory="templates")
+
+
+@router.get("/register", response_class=HTMLResponse)
+async def register_page(request: Request):
+
+    return templates.TemplateResponse(
+        "register.html",
+        {
+            "request": request
+        }
+    )
+
+
+@router.post("/register")
+async def register(
+    request: Request,
+    username: str = Form(...),
+    email: str = Form(...),
+    password: str = Form(...)
+):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO users
+        (username, email, password)
+        VALUES (?, ?, ?)
+        """,
+        (
+            username,
+            email,
+            password
+        )
+    )
+
+    connection.commit()
+
+    connection.close()
+
+    return RedirectResponse(
+        url="/login",
+        status_code=303
+    )
+
+
+@router.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+
+    return templates.TemplateResponse(
+        "login.html",
+        {
+            "request": request
+        }
+    )
+
+
+@router.post("/login")
+async def login(
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...)
+):
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT * FROM users
+        WHERE email = ? AND password = ?
+        """,
+        (
+            email,
+            password
+        )
+    )
+
+    user = cursor.fetchone()
+
+    connection.close()
+
+    if user:
+
+        return RedirectResponse(
+            url="/dashboard",
+            status_code=303
+        )
+
+    return templates.TemplateResponse(
+        "login.html",
+        {
+            "request": request,
+            "error": "Invalid email or password"
+        }
+    )
+
+
+@router.get("/logout")
+async def logout():
+
+    return RedirectResponse(
+        url="/login",
+        status_code=303
+    )
+Note: This is a simple college-project authentication implementation. For a real production application, passwords should be hashed and sessions/JWT should be implemented securely.
