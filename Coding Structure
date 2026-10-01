@@ -1,0 +1,48 @@
+PocketSmart-AI/
+│
+├── 1. Gemini AI Setup & Initialization
+│   ├── .env
+│   ├── requirements.txt
+│   └── gemini_test.py
+│
+├── 2. Core Functionality Development
+│   └── app/
+│       └── services/
+│           └── gemini_utils.py
+│
+├── 3. Backend Implementation
+│   └── app/
+│       ├── main.py
+│       ├── database.py
+│       ├── schemas.py
+│       │
+│       └── routes/
+│           ├── home.py
+│           ├── party.py
+│           ├── jewelry.py
+│           └── auth.py
+│
+├── 4. UI Development
+│   ├── templates/
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   ├── dashboard.html
+│   │   ├── home_planner.html
+│   │   ├── home_recommendations.html
+│   │   ├── party_planner.html
+│   │   ├── party_recommendations.html
+│   │   ├── jewelry_planner.html
+│   │   ├── jewelry_recommendations.html
+│   │   └── history.html
+│   │
+│   └── static/
+│       ├── style.css
+│       └── script.js
+│
+├── 5. Testing & Optimization
+│   └── test_project.py
+│
+├── README.md
+└── .gitignore
+The source document organizes the implementation around Gemini setup, core functionality, FastAPI backend, UI development, testing, and documentation.
