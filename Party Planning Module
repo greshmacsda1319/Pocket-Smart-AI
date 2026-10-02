@@ -1,0 +1,62 @@
+app/routes/party.py
+The source specifies /generate-party for party planning based on budget, event details, guest count, venue, food, and decoration. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+from app.services.gemini_utils import (
+    get_party_recommendations
+)
+
+
+router = APIRouter()
+
+templates = Jinja2Templates(
+    directory="templates"
+)
+
+
+@router.get(
+    "/party-planner",
+    response_class=HTMLResponse
+)
+async def party_planner(request: Request):
+
+    return templates.TemplateResponse(
+        "party_planner.html",
+        {
+            "request": request
+        }
+    )
+
+
+@router.post(
+    "/generate-party",
+    response_class=HTMLResponse
+)
+async def generate_party(
+    request: Request,
+    budget: float = Form(...),
+    guests: int = Form(...),
+    event_type: str = Form(...),
+    venue: str = Form(...)
+):
+
+    recommendation = get_party_recommendations(
+        budget,
+        guests,
+        event_type,
+        venue
+    )
+
+    return templates.TemplateResponse(
+        "party_recommendations.html",
+        {
+            "request": request,
+            "recommendation": recommendation,
+            "budget": budget,
+            "guests": guests,
+            "event_type": event_type
+        }
+    )
