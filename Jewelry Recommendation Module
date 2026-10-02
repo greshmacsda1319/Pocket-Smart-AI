@@ -1,0 +1,60 @@
+app/routes/jewelry.py
+The source describes Jewelry Planner as accepting budget, occasion, style preferences, and optional image input. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+from app.services.gemini_utils import (
+    get_jewelry_recommendations
+)
+
+
+router = APIRouter()
+
+templates = Jinja2Templates(
+    directory="templates"
+)
+
+
+@router.get(
+    "/jewelry-planner",
+    response_class=HTMLResponse
+)
+async def jewelry_planner(request: Request):
+
+    return templates.TemplateResponse(
+        "jewelry_planner.html",
+        {
+            "request": request
+        }
+    )
+
+
+@router.post(
+    "/generate-jewelry",
+    response_class=HTMLResponse
+)
+async def generate_jewelry(
+    request: Request,
+    budget: float = Form(...),
+    occasion: str = Form(...),
+    style: str = Form(...)
+):
+
+    recommendation = get_jewelry_recommendations(
+        budget,
+        occasion,
+        style
+    )
+
+    return templates.TemplateResponse(
+        "jewelry_recommendations.html",
+        {
+            "request": request,
+            "recommendation": recommendation,
+            "budget": budget,
+            "occasion": occasion,
+            "style": style
+        }
+    )
