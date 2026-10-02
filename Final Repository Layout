@@ -1,0 +1,58 @@
+This is the clean version you can directly use for your GitHub repository:PocketSmart-AI/
+│
+├── 1. Gemini AI Setup & Initialization/
+│   ├── .env
+│   ├── requirements.txt
+│   └── gemini_test.py
+│
+├── 2. Core Functionality Development/
+│   └── gemini_utils.py
+│
+├── 3. Backend Implementation/
+│   ├── main.py
+│   ├── database.py
+│   ├── schemas.py
+│   └── routes/
+│       ├── home.py
+│       ├── party.py
+│       ├── jewelry.py
+│       └── auth.py
+│
+├── 4. UI Development/
+│   ├── templates/
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   ├── dashboard.html
+│   │   ├── home_planner.html
+│   │   ├── home_recommendations.html
+│   │   ├── party_planner.html
+│   │   ├── party_recommendations.html
+│   │   ├── jewelry_planner.html
+│   │   ├── jewelry_recommendations.html
+│   │   ├── history.html
+│   │   └── testimonials.html
+│   │
+│   └── static/
+│       ├── style.css
+│       └── script.js
+│
+├── 5. Testing & Optimization/
+│   └── test_project.py
+│
+├── README.md
+└── .gitignoreGemini Setup
+     ↓
+Core AI Functions
+     ↓
+FastAPI Backend
+     ↓
+Home / Party / Jewelry Routes
+     ↓
+Authentication
+     ↓
+HTML + CSS + JavaScript
+     ↓
+Gemini Recommendations
+     ↓
+Testing & Optimization
