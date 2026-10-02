@@ -1,0 +1,56 @@
+The source specifies FastAPI routes for the three major recommendation modules and authentication/session functionality. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+app/main.py
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
+from app.routes.home import router as home_router
+from app.routes.party import router as party_router
+from app.routes.jewelry import router as jewelry_router
+from app.routes.auth import router as auth_router
+
+from app.database import create_tables
+
+
+app = FastAPI(
+    title="PocketSmart AI",
+    description="Smart Budget and Recommendation Assistant",
+    version="1.0.0"
+)
+
+
+create_tables()
+
+
+app.mount(
+    "/static",
+    StaticFiles(directory="static"),
+    name="static"
+)
+
+
+app.include_router(home_router)
+app.include_router(party_router)
+app.include_router(jewelry_router)
+app.include_router(auth_router)
+
+
+@app.get("/startup")
+async def startup():
+
+    return {
+        "message": "PocketSmart AI started successfully"
+    }
+
+
+if __name__ == "__main__":
+
+    import uvicorn
+
+    uvicorn.run(
+        "app.main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True
+    )
+The document explicitly includes FastAPI initialization, route integration, static routing, a startup endpoint, and the Uvicorn __main__ entry point.
