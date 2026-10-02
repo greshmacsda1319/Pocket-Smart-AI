@@ -1,0 +1,21 @@
+The source specifies a Jinja2 frontend with separate planner forms, recommendation displays, login/register pages, history, and testimonials. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+HTML Structure
+templates/
+│
+├── index.html
+├── login.html
+├── register.html
+├── dashboard.html
+│
+├── home_planner.html
+├── home_recommendations.html
+│
+├── party_planner.html
+├── party_recommendations.html
+│
+├── jewelry_planner.html
+├── jewelry_recommendations.html
+│
+├── history.html
+└── testimonials.html
