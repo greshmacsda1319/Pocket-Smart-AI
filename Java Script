@@ -1,0 +1,51 @@
+static/script.jsThe source mentions dynamic result display and formatting through JavaScript. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+function showLoading() {
+
+    const loading =
+        document.getElementById("loading");
+
+    if (loading) {
+        loading.style.display = "block";
+    }
+}
+
+
+function hideLoading() {
+
+    const loading =
+        document.getElementById("loading");
+
+    if (loading) {
+        loading.style.display = "none";
+    }
+Testing & Optimization
+The source includes testing with real-world budgets, Gemini response quality, budget adherence, validation, and fallback recommendations. �
+PocketSmart AI_ Your Smart Budget & Recommendation Assistant (1) (1)-1.docx
+test_project.py
+def test_budget():
+
+    budget = 10000
+
+    assert budget > 0
+
+
+def test_guest_count():
+
+    guests = 50
+
+    assert guests > 0
+
+
+def test_home_input():
+
+    room = "Living Room"
+
+    assert room != ""
+
+
+def test_jewelry_input():
+
+    occasion = "Wedding"
+
+    assert occasion != ""
