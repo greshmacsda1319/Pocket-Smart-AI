@@ -1,0 +1,147 @@
+templates/home_planner.html
+HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Home Interior Planner</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+templates/party_planner.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Party Planner</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Party Budget Planner</h1>
+
+    <form action="/generate-party"
+          method="post">
+
+        <label>Budget</label>
+
+        <input
+            type="number"
+            name="budget"
+            required
+        >
+
+        <label>Number of Guests</label>
+
+        <input
+            type="number"
+            name="guests"
+            required
+        >
+
+        <label>Event Type</label>
+
+        <input
+            type="text"
+            name="event_type"
+            required
+        >
+
+        <label>Venue</label>
+
+        <input
+            type="text"
+            name="venue"
+            required
+        >
+
+        <button type="submit">
+            Generate Party Plan
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>9
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Jewelry Planner</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Jewelry Budget Planner</h1>
+
+    <form action="/generate-jewelry"
+          method="post">
+
+        <label>Budget</label>
+
+        <input
+            type="number"
+            name="budget"
+            required
+        >
+
+        <label>Occasion</label>
+
+        <input
+            type="text"
+            name="occasion"
+            required
+        >
+
+        <label>Style Preference</label>
+
+        <input
+            type="text"
+            name="style"
+            required
+        >
+
+        <button type="submit">
+            Generate Jewelry Recommendations
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>
